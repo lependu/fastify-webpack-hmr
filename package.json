@@ -2,7 +2,6 @@
   "name": "fastify-webpack-hmr",
   "version": "0.1.0",
   "description": "Minimal webpack hot reloading example with fastify",
-  "private": true,
   "main": "plugin.js",
   "scripts": {
     "coverage": "tap test.js --cov --no-browser --coverage-report html",
