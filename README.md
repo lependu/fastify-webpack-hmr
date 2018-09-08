@@ -4,6 +4,9 @@
 [![Build Status](https://travis-ci.org/lependu/fastify-webpack-hmr.svg?branch=master)](https://travis-ci.org/lependu/fastify-webpack-hmr)
 [![Greenkeeper badge](https://badges.greenkeeper.io/lependu/fastify-webpack-hmr.svg)](https://greenkeeper.io/)
 [![Known Vulnerabilities](https://snyk.io/test/github/lependu/fastify-webpack-hmr/badge.svg)](https://snyk.io/test/github/lependu/fastify-webpack-hmr)
+[![Coverage Status](https://coveralls.io/repos/github/lependu/fastify-webpack-hmr/badge.svg?branch=master)](https://coveralls.io/github/lependu/fastify-webpack-hmr?branch=master)
+![npm](https://img.shields.io/npm/dm/fastify-webpack-hmr.svg)
+![npm](https://img.shields.io/npm/v/fastify-webpack-hmr.svg)
 
 Inspired by [koa-webpack](https://github.com/shellscape/koa-webpack) plugin.  
 Under the hood it sets up [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) and [webpack-hot-middleware](https://github.com/webpack-contrib/webpack-hot-middleware).
