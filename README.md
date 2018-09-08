@@ -15,7 +15,7 @@ $ npm i --save-dev fastify-webpack-hmr
 
 ## Configuration options
 
-For a complete exampe please check out the `example` directory and the `test.js` file.
+For a complete exampe please check out the `example` directory and the `test.js` file.  
 The plugin accepts a configuration object, with a following properties:
 
 ### compiler
@@ -43,7 +43,7 @@ If you pass a custom `webpack compiler` instance to the plugin, it will pass tha
 ### config
 `{string|object}` `optional`
 
-For the detailed configuration options please check the [`webpack documentation`](https://webpack.js.org/configuration/). 
+For the detailed configuration options please check the [`webpack documentation`](https://webpack.js.org/configuration/).   
 If config is a `string` it has to be a path to a valid webpack configuration file.
 <details>
   <summary><strong>Example</strong></summary>
