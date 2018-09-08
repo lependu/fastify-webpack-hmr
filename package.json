@@ -1,0 +1,41 @@
+{
+  "name": "fastify-webpack-hmr",
+  "version": "0.1.0",
+  "description": "Minimal webpack hot reloading example with fastify",
+  "private": true,
+  "main": "plugin.js",
+  "scripts": {
+    "coverage": "tap test.js --cov --no-browser --coverage-report html",
+    "lint": "standard --fix",
+    "test": "standard --fix && tap test.js --cov --no-browser",
+    "example": "node example/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lependu/fastify-webpack-hmr.git"
+  },
+  "keywords": [
+    "fastify",
+    "fastify-plugin",
+    "webpack",
+    "hmr"
+  ],
+  "author": "Ákos Kovács <lependu@protonmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lependu/fastify-webpack-hmr/issues"
+  },
+  "homepage": "https://github.com/lependu/fastify-webpack-hmr#readme",
+  "devDependencies": {
+    "fastify": "^1.11.1",
+    "simple-get": "^3.0.3",
+    "standard": "^12.0.0",
+    "tap": "^12.0.1"
+  },
+  "dependencies": {
+    "fastify-plugin": "^1.2.0",
+    "webpack": "^4.17.2",
+    "webpack-dev-middleware": "^3.2.0",
+    "webpack-hot-middleware": "^2.23.1"
+  }
+}
