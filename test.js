@@ -22,9 +22,9 @@ test('Decorates instance', t => {
 
   register(t, opts, (err, fastify) => {
     t.error(err)
-    t.equal(typeof fastify.webpackCompiler, 'object')
-    t.equal(typeof fastify.webpackDev, 'function')
-    t.equal(typeof fastify.webpackHot, 'function')
+    t.equal(typeof fastify.webpack.compiler, 'object')
+    t.equal(typeof fastify.webpack.dev, 'function')
+    t.equal(typeof fastify.webpack.hot, 'function')
   })
 })
 
@@ -77,6 +77,31 @@ test('Works with multiple entries', t => {
   testHMR(t, opts, 'assets/second.js')
 })
 
+test('Throws fastify@webpack has registered already', t => {
+  t.plan(2)
+
+  const fastify = Fastify()
+  t.tearDown(() => fastify.close())
+
+  const opts = {
+    config: {
+      mode: 'development',
+      stats: false,
+      entry: join(__dirname, 'example', 'client.js'),
+      output: { publicPath: '/assets', filename: 'main.js' }
+    },
+    webpackDev: { logLevel: 'silent' }
+  }
+
+  fastify
+    .decorate('webpack', {})
+    .register(plugin, opts)
+    .ready(err => {
+      t.ok(err instanceof Error)
+      t.match(err.message, /fastify.webpack has registered already./)
+    })
+})
+
 test('Throws if no configuration provided', t => {
   t.plan(2)
 
@@ -116,7 +141,7 @@ test('Sets webpackDev publicPath option from config.output.publicPath', t => {
 
   register(t, opts, (err, fastify) => {
     t.error(err)
-    t.equal(fastify.webpackDev.context.options.publicPath, '/assets')
+    t.equal(fastify.webpack.dev.context.options.publicPath, '/assets')
   })
 })
 
@@ -135,7 +160,7 @@ test('Respects webpackDev publicPath configuration if it is provided', t => {
 
   register(t, opts, (err, fastify) => {
     t.error(err)
-    t.equal(fastify.webpackDev.context.options.publicPath, '/something-else')
+    t.equal(fastify.webpack.dev.context.options.publicPath, '/something-else')
   })
 })
 

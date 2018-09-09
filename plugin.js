@@ -37,14 +37,30 @@ function fastifyWebpack (instance, opts, next) {
   const hotWare = webpackHotMiddleware(compiler, webpackHot)
 
   instance
-    .decorate('webpackCompiler', compiler)
-    .decorate('webpackDev', devWare)
-    .decorate('webpackHot', hotWare)
     .use(devWare)
     .use(hotWare)
-    .addHook('onClose', (instance, next) => {
-      instance.webpackDev.close(() => next)
-    })
+
+  decorateFastifyInstance(instance, compiler, devWare, hotWare, next)
+}
+
+function decorateFastifyInstance (instance, compiler, dev, hot, next) {
+  if (!instance.webpack) {
+    const webpack = {
+      compiler,
+      dev,
+      hot
+    }
+    instance
+      .decorate('webpack', webpack)
+      .addHook('onClose', (instance, next) => {
+        instance.webpack.dev.close(() => next)
+      })
+  } else {
+    dev.close()
+    return next(
+      new Error('[fastify-weback-hmr]: fastify.webpack has registered already.')
+    )
+  }
   next()
 }
 

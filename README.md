@@ -89,5 +89,11 @@ Additional configuration options which will be passed to [`webpack-dev-middlewar
 
 Additional configuration options which will be passed to [`webpack-hot-middleware`](https://github.com/webpack-contrib/webpack-hot-middleware#config).
 
+## Reference
+This plugin decorates the `fastify` instance with `webpack` object. The object has the following properties:
+- `compiler` The [`webpack compiler` instance](https://webpack.js.org/api/node/).
+- `dev` The [`webpack-dev-middleware` instance](https://github.com/webpack/webpack-dev-middleware#api).
+- `hot` The [`webpack-hot-middleware` instance](https://github.com/webpack-contrib/webpack-hot-middleware).
+
 ## License
 Licensed under [MIT](./LICENSE).
