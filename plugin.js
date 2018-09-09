@@ -10,7 +10,7 @@ function fastifyWebpack (instance, opts, next) {
   let { compiler, config, webpackDev = {}, webpackHot = {} } = opts
 
   if (!compiler) {
-    if (typeof config !== 'object') {
+    if (typeof config !== 'object' && !Array.isArray(config)) {
       let path = config || join(__dirname, 'webpack.config.js')
       try {
         config = require(path)
@@ -25,6 +25,10 @@ function fastifyWebpack (instance, opts, next) {
   }
 
   if (!webpackDev.publicPath) {
+    if (~Object.keys(compiler).indexOf('compilers')) {
+      return next(new Error('[fastify-webpack-hmr]: You must specify webpackDev.publicPath option in multi compiler mode.'))
+    }
+
     let { publicPath } = compiler.options.output
 
     if (!publicPath) {

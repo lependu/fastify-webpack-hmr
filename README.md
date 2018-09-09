@@ -89,6 +89,47 @@ Additional configuration options which will be passed to [`webpack-dev-middlewar
 
 Additional configuration options which will be passed to [`webpack-hot-middleware`](https://github.com/webpack-contrib/webpack-hot-middleware#config).
 
+## Multi compiler mode
+In multi compiler mode you must pass `webpackDev.publicPath` option with the configuration.
+
+> *Tip:* Don't forget to set name parameter when you register `webpack-hot-middleware` in entry array. It makes sure that bundles don't process each other's updates.
+
+```js
+const fastify = require('fastify')()
+const HMR = require('fastify-webpack-hmr')
+const { join } = require('path')
+const hotConf = 'webpack-hot-middleware/client?path=/__webpack_hmr'
+
+const config = [
+  {
+    name: 'mobile',
+    mode: 'development',
+    entry: [
+      join(__dirname, 'example', 'mobile.js'),
+      `${hotConfig}&name=mobile`
+    ],
+    stats: false,
+    output: { filename: 'mobile.js', publicPath: '/assets' }
+  },
+  {
+    name: 'desktop',
+    mode: 'development',
+    entry: [
+      join(__dirname, 'example', 'desktop.js'),
+      `${hotConfig}&name=desktop`
+    ],
+    stats: false,
+    output: { filename: 'desktop.js', publicPath: '/assets' }
+  }
+]
+
+const webpackDev = { publicPath: '/assets' }
+
+fastify.register(HMR, { config, webpackDev })
+
+fastify.listen(3000)
+```
+
 ## Reference
 This plugin decorates the `fastify` instance with `webpack` object. The object has the following properties:
 - `compiler` The [`webpack compiler` instance](https://webpack.js.org/api/node/).

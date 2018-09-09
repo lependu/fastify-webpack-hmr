@@ -77,6 +77,40 @@ test('Works with multiple entries', t => {
   testHMR(t, opts, 'assets/second.js')
 })
 
+test('Works in multi compiler mode', t => {
+  t.plan(14)
+
+  const hotConfig = 'webpack-hot-middleware/client?path=__webpack_hmr'
+  const opts = {
+    config: [
+      {
+        name: 'mobile',
+        mode: 'development',
+        entry: [
+          join(__dirname, 'example', 'client.js'),
+          `${hotConfig}&name=mobile`
+        ],
+        stats: false,
+        output: { filename: 'mobile.js', publicPath: '/assets' }
+      },
+      {
+        name: 'desktop',
+        mode: 'development',
+        entry: [
+          join(__dirname, 'example', 'client.js'),
+          `${hotConfig}&name=desktop`
+        ],
+        stats: false,
+        output: { filename: 'desktop.js', publicPath: '/assets' }
+      }
+    ],
+    webpackDev: { logLevel: 'silent', publicPath: '/assets' }
+  }
+
+  testHMR(t, opts, 'assets/mobile.js')
+  testHMR(t, opts, 'assets/desktop.js')
+})
+
 test('Throws fastify@webpack has registered already', t => {
   t.plan(2)
 
@@ -161,6 +195,45 @@ test('Respects webpackDev publicPath configuration if it is provided', t => {
   register(t, opts, (err, fastify) => {
     t.error(err)
     t.equal(fastify.webpack.dev.context.options.publicPath, '/something-else')
+  })
+})
+
+test('Throws if webpackDev.publicPath option not explicitly defined in multi compiler mode', t => {
+  t.plan(2)
+
+  const hotConfig = 'webpack-hot-middleware/client?path=__webpack_hmr'
+  const opts = {
+    config: [
+      {
+        name: 'mobile',
+        mode: 'development',
+        entry: [
+          join(__dirname, 'example', 'client.js'),
+          `${hotConfig}&name=mobile`
+        ],
+        stats: false,
+        output: { filename: 'mobile.js', publicPath: '/assets' }
+      },
+      {
+        name: 'desktop',
+        mode: 'development',
+        entry: [
+          join(__dirname, 'example', 'client.js'),
+          `${hotConfig}&name=desktop`
+        ],
+        stats: false,
+        output: { filename: 'desktop.js', publicPath: '/assets' }
+      }
+    ],
+    webpackDev: { logLevel: 'silent' }
+  }
+
+  register(t, opts, (err, fastify) => {
+    t.ok(err instanceof Error)
+    t.match(
+      err.message,
+      /You must specify webpackDev.publicPath option in multi compiler mode./
+    )
   })
 })
 
