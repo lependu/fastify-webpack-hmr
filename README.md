@@ -16,78 +16,68 @@ Under the hood it sets up [webpack-dev-middleware](https://github.com/webpack/we
 $ npm i --save-dev fastify-webpack-hmr
 ```
 
-## Configuration options
+## Usage
 
-For a complete exampe please check out the `example` directory and the `test.js` file.  
+For a more detailed exampe please check out the `example` directory.  
 The plugin accepts a configuration object, with a following properties:
 
 ### compiler
 `{object}` `optional`
 
-If you pass a custom `webpack compiler` instance to the plugin, it will pass that to the middlewares.
+If you pass a custom `webpack compiler` instance to the plugin, it will pass that to the middlewares.  
+*Note:* if you pass a `compiler` option the plugin omits the `config` option.
+```js
+const fastify = require('fastify')()
+const HMR = require('fastify-webpack-hmr')
+const webpack = require('webpack')
+const webpackConfig = require('path/to/your/webpack/config')
 
-<details>
-  <summary><strong>Example</strong></summary>
-  
-  ```js
-  const fastify = require('fastify')()
-  const HMR = require('fastify-webpack-hmr')
-  const webpack = require('webpack')
-  const webpackConfig = require('path/to/your/webpack/config')
-  
-  const compiler = webpack(webpackConfig)
-  
-  fastify.register(HMR, { compiler })
-  
-  fastify.listen(3000)
-  ```
-</details>
+const compiler = webpack(webpackConfig)
+
+fastify.register(HMR, { compiler })
+
+fastify.listen(3000)
+```
 
 ### config
 `{string|object}` `optional`
 
-For the detailed configuration options please check the [`webpack documentation`](https://webpack.js.org/configuration/).   
+If you pass this option instead of a `compiler`, the plugin tries to set up the webpack compiler and will pass that compiler instance to the middlewares. For the detailed configuration options please check the [`webpack documentation`](https://webpack.js.org/configuration/).  
+
 If config is a `string` it has to be a path to a valid webpack configuration file.
-<details>
-  <summary><strong>Example</strong></summary>
+```js
+const fastify = require('fastify')()
+const HMR = require('fastify-webpack-hmr')
+const { join } = require('path')
 
-  ```js
-  const fastify = require('fastify')()
-  const HMR = require('fastify-webpack-hmr')
-  const { join } = require('path')
-  
-  const config = join(__dirname, 'path.to.your.webpack.config')
-  
-  fastify.register(HMR, { config })
-  
-  fastify.listen(3000)
+const config = join(__dirname, 'path.to.your.webpack.config')
+
+fastify.register(HMR, { config })
+
+fastify.listen(3000)
   ```
-</details>
-
+  
 Or you can directly pass a valid webpack configuration `object`.
+```js
+const fastify = require('fastify')()
+const HMR = require('fastify-webpack-hmr')
+const { join } = require('path')
+const hotConf = 'webpack-hot-middleware/client?path=/__webpack_hmr'
 
-<details>
-  <summary><strong>Example</strong></summary>
-  
-  ```js
-  const fastify = require('fastify')()
-  const HMR = require('fastify-webpack-hmr')
-  const { join } = require('path')
-  
-  const config = {
-    mode: 'development', // Prevents webpack warning
-    entry: join(__dirname, 'path.to.your.client.file'),
-    output: {
-      publicPath: '/assets',
-      filename: 'main.js'
-    }
+const config = {
+  mode: 'development', // Prevents webpack warning
+  // Add the webpack-hot-middleware to the entry point array.
+  entry: [join(__dirname, 'path.to.your.client.file'), hotConf],
+  output: {
+    publicPath: '/assets',
+    filename: 'main.js'
   }
-  
-  fastify.register(HMR, { config })
-  
-  fastify.listen(3000)
-  ```
-</details>
+}
+
+fastify.register(HMR, { config })
+
+fastify.listen(3000)
+```
 
 ### webpackDev
 `{object}` `optional`
