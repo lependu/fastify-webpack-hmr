@@ -90,7 +90,7 @@ Additional configuration options which will be passed to [`webpack-dev-middlewar
 Additional configuration options which will be passed to [`webpack-hot-middleware`](https://github.com/webpack-contrib/webpack-hot-middleware#config).
 
 ## Multi compiler mode
-In multi compiler mode you must pass `webpackDev.publicPath` option with the configuration.
+In multi compiler mode you must pass the `webpackDev.publicPath` option to the plugin.
 
 > *Tip:* Don't forget to set name parameter when you register `webpack-hot-middleware` in entry array. It makes sure that bundles don't process each other's updates.
 
@@ -106,7 +106,7 @@ const config = [
     mode: 'development',
     entry: [
       join(__dirname, 'example', 'mobile.js'),
-      `${hotConfig}&name=mobile`
+      `${hotConf}&name=mobile`
     ],
     stats: false,
     output: { filename: 'mobile.js', publicPath: '/assets' }
@@ -116,7 +116,7 @@ const config = [
     mode: 'development',
     entry: [
       join(__dirname, 'example', 'desktop.js'),
-      `${hotConfig}&name=desktop`
+      `${hotConf}&name=desktop`
     ],
     stats: false,
     output: { filename: 'desktop.js', publicPath: '/assets' }
