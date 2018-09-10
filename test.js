@@ -41,7 +41,17 @@ test('Works with custom compiler', t => {
   testHMR(t, { compiler, webpackDev }, 'assets/main.js')
 })
 
-test('Works with config option', t => {
+test('Works with config option | string', t => {
+  t.plan(7)
+  const opts = {
+    config: join(__dirname, 'example', 'webpack.config.js'),
+    webpackDev: { logLevel: 'silent' }
+  }
+
+  testHMR(t, opts, 'assets/main.js')
+})
+
+test('Works with config option | object', t => {
   t.plan(7)
   const opts = {
     config: {
@@ -77,7 +87,7 @@ test('Works with multiple entries', t => {
   testHMR(t, opts, 'assets/second.js')
 })
 
-test('Works in multi compiler mode', t => {
+test('Works with multi compiler config', t => {
   t.plan(14)
 
   const hotConfig = 'webpack-hot-middleware/client?path=__webpack_hmr'
@@ -111,7 +121,7 @@ test('Works in multi compiler mode', t => {
   testHMR(t, opts, 'assets/desktop.js')
 })
 
-test('Throws fastify@webpack has registered already', t => {
+test('Throws if fastify.webpack has registered already', t => {
   t.plan(2)
 
   const fastify = Fastify()
@@ -140,6 +150,17 @@ test('Throws if no configuration provided', t => {
   t.plan(2)
 
   const opts = {}
+
+  register(t, opts, (err, fastify) => {
+    t.ok(err instanceof Error)
+    t.match(err.message, /configuration is missing./)
+  })
+})
+
+test('Throws if config option is invalid', t => {
+  t.plan(2)
+
+  const opts = { config: 42 }
 
   register(t, opts, (err, fastify) => {
     t.ok(err instanceof Error)
