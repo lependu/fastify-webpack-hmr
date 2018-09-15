@@ -29,4 +29,4 @@ fastify
 </html>`)
   })
 
-fastify.listen(3000, '0.0.0.0')
+fastify.listen(3000)
