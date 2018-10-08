@@ -4,9 +4,9 @@
   "description": "Webpack hot module reloading for Fastify",
   "main": "plugin.js",
   "scripts": {
-    "coverage": "tap test.js --cov --no-browser --coverage-report html",
+    "coverage": "tap test/**/*.test.js --cov",
     "lint": "standard --fix",
-    "test": "standard --fix && tap test.js --cov --no-browser",
+    "test": "standard --fix && tap test/**/*.test.js",
     "example": "node example/server.js"
   },
   "repository": {
@@ -39,8 +39,8 @@
   },
   "nyc": {
     "exclude": [
-      "test.js",
-      "example/webpack.config.js"
+      "example/**/*",
+      "test/*"
     ]
   }
 }
