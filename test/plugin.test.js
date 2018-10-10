@@ -72,7 +72,7 @@ test('Throws if config option is invalid', t => {
 
   register(t, opts, (err, fastify) => {
     t.ok(err instanceof Error)
-    t.match(err.message, /The "id" argument must be of type string./)
+    t.match(err.message, /must be .{0,} string/g)
   })
 })
 
