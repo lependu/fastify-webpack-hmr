@@ -61,7 +61,7 @@ test('Throws if no configuration provided', t => {
 
   register(t, opts, (err, fastify) => {
     t.ok(err instanceof Error)
-    t.match(err.message, /configuration is missing./)
+    t.match(err.message, /Cannot find module/)
   })
 })
 
@@ -72,7 +72,7 @@ test('Throws if config option is invalid', t => {
 
   register(t, opts, (err, fastify) => {
     t.ok(err instanceof Error)
-    t.match(err.message, /configuration is missing./)
+    t.match(err.message, /The "id" argument must be of type string./)
   })
 })
 

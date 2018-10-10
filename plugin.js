@@ -15,9 +15,7 @@ function fastifyWebpack (instance, opts, next) {
       try {
         config = require(path)
       } catch (err) {
-        return next(new Error(
-          '[fastify-webpack-hmr]: configuration is missing.'
-        ))
+        return next(err)
       }
     }
 
