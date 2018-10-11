@@ -7,6 +7,12 @@ const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 
 function fastifyWebpack (instance, opts, next) {
+  if (instance.hasDecorator('webpack')) {
+    return next(
+      new Error('[fastify-weback-hmr]: fastify.webpack has registered already.')
+    )
+  }
+
   let { compiler, config, webpackDev = {}, webpackHot = {} } = opts
 
   if (!compiler) {
@@ -35,34 +41,20 @@ function fastifyWebpack (instance, opts, next) {
     webpackDev.publicPath = publicPath
   }
 
-  const devWare = webpackDevMiddleware(compiler, webpackDev)
-  const hotWare = webpackHotMiddleware(compiler, webpackHot)
+  const dev = webpackDevMiddleware(compiler, webpackDev)
+  const hot = webpackHotMiddleware(compiler, webpackHot)
 
   instance
-    .use(devWare)
-    .use(hotWare)
-
-  decorateFastifyInstance(instance, compiler, devWare, hotWare, next)
-}
-
-function decorateFastifyInstance (instance, compiler, dev, hot, next) {
-  if (!instance.webpack) {
-    const webpack = {
+    .use(dev)
+    .use(hot)
+    .decorate('webpack', {
       compiler,
       dev,
       hot
-    }
-    instance
-      .decorate('webpack', webpack)
-      .addHook('onClose', (instance, next) => {
-        instance.webpack.dev.close(() => next)
-      })
-  } else {
-    dev.close()
-    return next(
-      new Error('[fastify-weback-hmr]: fastify.webpack has registered already.')
-    )
-  }
+    })
+    .addHook('onClose', (instance, next) => {
+      instance.webpack.dev.close(() => next)
+    })
   next()
 }
 
