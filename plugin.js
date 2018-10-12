@@ -42,11 +42,15 @@ function fastifyWebpack (instance, opts, next) {
   }
 
   const dev = webpackDevMiddleware(compiler, webpackDev)
-  const hot = webpackHotMiddleware(compiler, webpackHot)
+  instance.use(dev)
+
+  let hot = null
+  if (webpackHot) {
+    hot = webpackHotMiddleware(compiler, webpackHot)
+    instance.use(hot)
+  }
 
   instance
-    .use(dev)
-    .use(hot)
     .decorate('webpack', {
       compiler,
       dev,

@@ -16,7 +16,7 @@ function register (t, opts, callback) {
     })
 }
 
-function testHMR (t, opts, asset) {
+function testHMR (t, opts, asset, hot = true) {
   const fastify = Fastify()
   t.tearDown(() => fastify.close())
 
@@ -25,15 +25,17 @@ function testHMR (t, opts, asset) {
   fastify.listen(0, err => {
     t.error(err)
     let port = fastify.server.address().port
-    get(
-      `http://127.0.0.1:${port}/__webpack_hmr`,
-      function (err, res) {
-        t.error(err)
-        t.strictEqual(res.statusCode, 200)
-        t.match(res.headers['content-type'], /text\/event-stream/)
-        res.destroy()
-      }
-    )
+    if (hot) {
+      get(
+        `http://127.0.0.1:${port}/__webpack_hmr`,
+        function (err, res) {
+          t.error(err)
+          t.strictEqual(res.statusCode, 200)
+          t.match(res.headers['content-type'], /text\/event-stream/)
+          res.destroy()
+        }
+      )
+    }
     get(
       `http://127.0.0.1:${port}/${asset}`,
       function (err, res) {

@@ -29,6 +29,28 @@ test('Decorates instance', t => {
   })
 })
 
+test('Decorates instance | webpackHot = false', t => {
+  t.plan(4)
+
+  const opts = {
+    config: {
+      mode: 'development',
+      stats: false,
+      entry: WEBPACK_ENTRY,
+      output: { publicPath: '/assets', filename: 'main.js' }
+    },
+    webpackDev: { logLevel: 'silent' },
+    webpackHot: false
+  }
+
+  register(t, opts, (err, fastify) => {
+    t.error(err)
+    t.equal(typeof fastify.webpack.compiler, 'object')
+    t.equal(typeof fastify.webpack.dev, 'function')
+    t.equal(fastify.webpack.hot, null)
+  })
+})
+
 test('Throws if fastify.webpack has registered already', t => {
   t.plan(2)
 

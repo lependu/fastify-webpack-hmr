@@ -85,9 +85,10 @@ fastify.listen(3000)
 Additional configuration options which will be passed to [`webpack-dev-middleware`](https://github.com/webpack/webpack-dev-middleware#options).
 
 ### webpackHot
-`{object}` `optional`
+`{boolean|object}` `optional`
 
-Additional configuration options which will be passed to [`webpack-hot-middleware`](https://github.com/webpack-contrib/webpack-hot-middleware#config).
+You can `disable` webpack-hot-middleware if you set this option `false`.
+If it is an `object` it will be passed to [`webpack-hot-middleware`](https://github.com/webpack-contrib/webpack-hot-middleware#config).
 
 ## Multi compiler mode
 In multi compiler mode you must pass the `webpackDev.publicPath` option to the plugin.

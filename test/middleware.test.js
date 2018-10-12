@@ -46,6 +46,22 @@ test('Works with config option | object', t => {
   testHMR(t, opts, 'assets/main.js')
 })
 
+test('Works with webpackHot disabled', t => {
+  t.plan(4)
+  const opts = {
+    config: {
+      mode: 'development',
+      stats: false,
+      entry: WEBPACK_ENTRY,
+      output: { publicPath: '/assets', filename: 'main.js' }
+    },
+    webpackDev: { logLevel: 'silent' },
+    webpackHot: false
+  }
+
+  testHMR(t, opts, 'assets/main.js', false)
+})
+
 test('Works with multiple entries', t => {
   t.plan(14)
 
