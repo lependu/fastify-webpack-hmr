@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/lependu/fastify-webpack-hmr#readme",
   "devDependencies": {
-    "fastify": "^1.13.0",
+    "fastify": "^1.13.4",
     "simple-get": "^3.0.3",
     "standard": "^12.0.0",
     "tap": "^12.1.2"
