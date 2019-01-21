@@ -16,6 +16,17 @@ Under the hood it sets up [webpack-dev-middleware](https://github.com/webpack/we
 $ npm i --save-dev fastify-webpack-hmr
 ```
 
+## Versions
+
+The plugin supports the following `Fastify` and `Webpack` versions. Please refer to corresponding branch in PR and issues.
+
+version | branch | fastify | webpack | support
+--------|--------|---------|------------|--------  
+1.x | [1.x](https://github.com/lependu/fastify-webpack-hmr/tree/1.x) | [1.x](https://github.com/fastify/fastify/tree/1.x) | [4.x](https://github.com/webpack/webpack/tree/master) | 2019-06-01  
+2.x | [master](https://github.com/lependu/fastify-webpack-hmr/tree/2.x) | [2.x](https://github.com/fastify/fastify/tree/master) | [4.x](https://github.com/webpack/webpack/tree/master)| TBD  
+
+> :warning: This project is meant to be used in development environment only.  
+
 ## Usage
 
 For a more detailed exampe please check out the `example` directory.  
