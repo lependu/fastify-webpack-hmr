@@ -29,7 +29,7 @@
     "fastify": "^1.13.4",
     "simple-get": "^3.0.3",
     "standard": "^12.0.0",
-    "tap": "^12.5.1"
+    "tap": "^12.7.0"
   },
   "dependencies": {
     "fastify-plugin": "^1.4.0",
@@ -41,6 +41,11 @@
     "exclude": [
       "example/**/*",
       "test/*"
+    ]
+  },
+  "greenkeeper": {
+    "ignore": [
+      "tap"
     ]
   }
 }
