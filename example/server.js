@@ -1,6 +1,6 @@
 'use strict'
 
-const plugin = require('../plugin')
+const plugin = require('../dist/plugin')
 const fastify = require('fastify')()
 const { join } = require('path')
 

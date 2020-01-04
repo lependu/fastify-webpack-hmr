@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "outDir": "dist",
+        "declaration": true,
+        "pretty": true,
+        "noEmitOnError": true,
+        "sourceMap": true,
+        "strictNullChecks": true,
+        "esModuleInterop": true,
+        "removeComments": true,
+        "noUnusedLocals": true
+    },
+    "exclude": [
+        "node_modules"
+    ],
+    "files": [
+        "./plugin.ts"
+    ]
+}

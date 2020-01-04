@@ -2,7 +2,7 @@
 
 const Fastify = require('fastify')
 const get = require('simple-get')
-const plugin = require('../plugin')
+const plugin = require('../dist/plugin')
 
 function register (t, opts, callback) {
   const fastify = Fastify()
@@ -24,7 +24,7 @@ function testHMR (t, opts, asset, hot = true) {
 
   fastify.listen(0, err => {
     t.error(err)
-    let port = fastify.server.address().port
+    const port = fastify.server.address().port
     if (hot) {
       get(
         `http://127.0.0.1:${port}/__webpack_hmr`,

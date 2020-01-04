@@ -2,11 +2,12 @@
   "name": "fastify-webpack-hmr",
   "version": "2.1.0",
   "description": "Webpack hot module reloading for Fastify",
-  "main": "plugin.js",
+  "main": "dist/plugin.js",
   "scripts": {
     "coverage": "tap test/**/*.test.js --cov",
     "lint": "standard --fix",
     "test": "standard --fix && tap test/**/*.test.js",
+    "build": "tsc -p ./tsconfig.json",
     "example": "node example/server.js"
   },
   "repository": {
@@ -26,10 +27,13 @@
   },
   "homepage": "https://github.com/lependu/fastify-webpack-hmr#readme",
   "devDependencies": {
+    "@types/webpack-dev-middleware": "^2.0.3",
+    "@types/webpack-hot-middleware": "^2.25.0",
     "fastify": "^2.4.1",
     "simple-get": "^3.0.3",
     "standard": "^14.0.0",
-    "tap": "^12.7.0"
+    "tap": "^12.7.0",
+    "typescript": "^3.7.4"
   },
   "dependencies": {
     "fastify-plugin": "^1.6.0",

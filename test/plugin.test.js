@@ -3,7 +3,7 @@
 const { test } = require('tap')
 const { join } = require('path')
 const Fastify = require('fastify')
-const plugin = require('../plugin')
+const plugin = require('../dist/plugin')
 const { register } = require('./helper')
 
 const WEBPACK_ENTRY = join(__dirname, '..', 'example', 'client.js')
@@ -101,12 +101,14 @@ test('Throws if config option is invalid', t => {
 test('Throws if no publicPath option provided', t => {
   t.plan(2)
 
-  const opts = { config: {
-    mode: 'development',
-    entry: WEBPACK_ENTRY,
-    stats: false,
-    output: { filename: 'main.js' }
-  } }
+  const opts = {
+    config: {
+      mode: 'development',
+      entry: WEBPACK_ENTRY,
+      stats: false,
+      output: { filename: 'main.js' }
+    }
+  }
 
   register(t, opts, (err, fastify) => {
     t.ok(err instanceof Error)
@@ -117,12 +119,14 @@ test('Throws if no publicPath option provided', t => {
 test('Sets webpackDev publicPath option from config.output.publicPath', t => {
   t.plan(2)
 
-  const opts = { config: {
-    mode: 'development',
-    entry: WEBPACK_ENTRY,
-    stats: false,
-    output: { filename: 'main.js', publicPath: '/assets' }
-  } }
+  const opts = {
+    config: {
+      mode: 'development',
+      entry: WEBPACK_ENTRY,
+      stats: false,
+      output: { filename: 'main.js', publicPath: '/assets' }
+    }
+  }
 
   register(t, opts, (err, fastify) => {
     t.error(err)
