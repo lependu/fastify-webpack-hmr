@@ -3,6 +3,7 @@
   "version": "2.1.0",
   "description": "Webpack hot module reloading for Fastify",
   "main": "plugin.js",
+  "engines": ">=10",
   "scripts": {
     "coverage": "tap test/**/*.test.js --cov",
     "lint": "standard --fix",
