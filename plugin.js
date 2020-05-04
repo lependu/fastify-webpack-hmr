@@ -6,23 +6,15 @@ const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 
-function fastifyWebpack (instance, opts, next) {
-  if (instance.hasDecorator('webpack')) {
-    return next(
-      new Error('[fastify-weback-hmr]: fastify.webpack has registered already.')
-    )
-  }
+async function fastifyWebpack (instance, opts) {
+  if (instance.hasDecorator('webpack')) throw new Error('[fastify-weback-hmr]: fastify.webpack has registered already.')
 
   let { compiler, config, webpackDev = {}, webpackHot = {} } = opts
 
   if (!compiler) {
     if (typeof config !== 'object' && !Array.isArray(config)) {
       const path = config || join(__dirname, 'webpack.config.js')
-      try {
-        config = require(path)
-      } catch (err) {
-        return next(err)
-      }
+      config = require(path)
     }
 
     compiler = webpack(config)
@@ -30,17 +22,18 @@ function fastifyWebpack (instance, opts, next) {
 
   if (!webpackDev.publicPath) {
     if (~Object.keys(compiler).indexOf('compilers')) {
-      return next(new Error('[fastify-webpack-hmr]: You must specify webpackDev.publicPath option in multi compiler mode.'))
+      throw new Error('[fastify-webpack-hmr]: You must specify webpackDev.publicPath option in multi compiler mode.')
     }
 
     const { publicPath } = compiler.options.output
 
     if (!publicPath) {
-      return next(new Error('[fastify-webpack-hmr]: publicPath must be set on `dev` options, or in a compiler\'s `output` configuration.'))
+      throw new Error('[fastify-webpack-hmr]: publicPath must be set on `dev` options, or in a compiler\'s `output` configuration.')
     }
     webpackDev.publicPath = publicPath
   }
 
+  await instance.register(require('middie'))
   const dev = webpackDevMiddleware(compiler, webpackDev)
   instance.use(dev)
 
@@ -59,7 +52,6 @@ function fastifyWebpack (instance, opts, next) {
     .addHook('onClose', (instance, next) => {
       instance.webpack.dev.close(() => next)
     })
-  next()
 }
 
 module.exports = fp(fastifyWebpack, {
