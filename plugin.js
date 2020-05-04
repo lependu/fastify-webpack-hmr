@@ -63,6 +63,6 @@ function fastifyWebpack (instance, opts, next) {
 }
 
 module.exports = fp(fastifyWebpack, {
-  fastify: '>=2.x',
+  fastify: '>=3.x',
   name: 'fastify-webpack'
 })
