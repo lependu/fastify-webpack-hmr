@@ -3,6 +3,7 @@
   "version": "2.1.0",
   "description": "Webpack hot module reloading for Fastify",
   "main": "plugin.js",
+  "engines": ">=10",
   "scripts": {
     "coverage": "tap test/**/*.test.js --cov",
     "lint": "standard --fix",
@@ -26,14 +27,14 @@
   },
   "homepage": "https://github.com/lependu/fastify-webpack-hmr#readme",
   "devDependencies": {
-    "fastify": "^2.4.1",
+    "fastify": "^2.13.1",
     "simple-get": "^3.0.3",
     "standard": "^14.0.0",
-    "tap": "^12.7.0"
+    "tap": "^14.10.7"
   },
   "dependencies": {
     "fastify-plugin": "^1.6.0",
-    "webpack": "^4.32.2",
+    "webpack": "^4.43.0",
     "webpack-dev-middleware": "^3.7.0",
     "webpack-hot-middleware": "^2.25.0"
   },
@@ -41,11 +42,6 @@
     "exclude": [
       "example/**/*",
       "test/*"
-    ]
-  },
-  "greenkeeper": {
-    "ignore": [
-      "tap"
     ]
   }
 }

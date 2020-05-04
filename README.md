@@ -22,7 +22,7 @@ The plugin supports the following `Fastify` and `Webpack` versions. Please refer
 
 version | branch | fastify | webpack | end of support
 --------|--------|---------|------------|--------  
-1.x | [1.x](https://github.com/lependu/fastify-webpack-hmr/tree/1.x) | [1.x](https://github.com/fastify/fastify/tree/1.x) | [4.x](https://github.com/webpack/webpack/tree/master) | 2019-09-01  
+1.x | [1.x](https://github.com/lependu/fastify-webpack-hmr/tree/1.x) | [1.x](https://github.com/fastify/fastify/tree/1.x) | [4.x](https://github.com/webpack/webpack/tree/master) | EOL 
 2.x | [master](https://github.com/lependu/fastify-webpack-hmr/tree/2.x) | [2.x](https://github.com/fastify/fastify/tree/master) | [4.x](https://github.com/webpack/webpack/tree/master)| TBD  
 
 > :warning: This project is meant to be used in development environment only.  
