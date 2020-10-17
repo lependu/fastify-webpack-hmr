@@ -33,7 +33,7 @@
     "tap": "^14.10.7"
   },
   "dependencies": {
-    "fastify-plugin": "^2.0.1",
+    "fastify-plugin": "^3.0.0",
     "middie": "^5.1.0",
     "webpack": "^4.43.0",
     "webpack-dev-middleware": "^3.7.0",
