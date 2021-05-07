@@ -30,7 +30,7 @@
     "fastify": "^3.0.3",
     "simple-get": "^4.0.0",
     "standard": "^16.0.0",
-    "tap": "^14.10.7"
+    "tap": "^15.0.9"
   },
   "dependencies": {
     "fastify-plugin": "^3.0.0",
