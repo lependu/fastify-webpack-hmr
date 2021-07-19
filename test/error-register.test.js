@@ -16,9 +16,10 @@ t.test('Throws if fastify.webpack has registered already', t => {
       mode: 'development',
       stats: false,
       entry: WEBPACK_ENTRY,
-      output: { publicPath: '/assets', filename: 'main.js' }
+      output: { publicPath: '/assets', filename: 'main.js' },
+      infrastructureLogging: { level: 'none' }
     },
-    webpackDev: { logLevel: 'silent' }
+    webpackDev: {}
   }
 
   fastify

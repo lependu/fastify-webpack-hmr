@@ -8,7 +8,8 @@ module.exports = {
   },
   stats: false,
   mode: 'development',
-  devtool: 'cheap-eval-source-map',
+  devtool: 'eval-cheap-source-map',
+  infrastructureLogging: { level: 'none' },
   output: {
     publicPath: '/assets',
     path: join(__dirname, 'dist'),

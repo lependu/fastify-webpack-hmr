@@ -10,9 +10,10 @@ const opts = {
     mode: 'development',
     entry: WEBPACK_ENTRY,
     stats: false,
-    output: { filename: 'main.js', publicPath: '/assets' }
+    output: { filename: 'main.js', publicPath: '/assets' },
+    infrastructureLogging: { level: 'none' }
   },
-  webpackDev: { noInfo: true, publicPath: '/something-else' }
+  webpackDev: { publicPath: '/something-else' }
 }
 
 t.test(

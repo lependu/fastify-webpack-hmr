@@ -34,9 +34,9 @@
   },
   "dependencies": {
     "fastify-plugin": "^3.0.0",
-    "middie": "^5.1.0",
-    "webpack": "^4.43.0",
-    "webpack-dev-middleware": "^3.7.0",
+    "middie": "^5.3.0",
+    "webpack": "^5.45.1",
+    "webpack-dev-middleware": "^5.0.0",
     "webpack-hot-middleware": "^2.25.0"
   },
   "nyc": {

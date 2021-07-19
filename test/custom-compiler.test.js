@@ -9,10 +9,11 @@ const WEBPACK_ENTRY = join(__dirname, '..', 'example', 'client.js')
 const opts = {
   mode: 'development',
   entry: WEBPACK_ENTRY,
-  output: { publicPath: '/assets', filename: 'main.js' }
+  output: { publicPath: '/assets', filename: 'main.js' },
+  infrastructureLogging: { level: 'none' }
 }
 const compiler = webpack(opts)
-const webpackDev = { logLevel: 'silent' }
+const webpackDev = {}
 
 t.test('Works with custom compiler', t => {
   buildServer(t, { compiler, webpackDev }, port => {

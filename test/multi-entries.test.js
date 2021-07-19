@@ -14,9 +14,10 @@ const opts = {
       first: [WEBPACK_ENTRY, hotConf],
       second: [WEBPACK_ENTRY, hotConf]
     },
-    output: { publicPath: '/assets', filename: '[name].js' }
+    output: { publicPath: '/assets', filename: '[name].js' },
+    infrastructureLogging: { level: 'none' }
   },
-  webpackDev: { logLevel: 'silent' }
+  webpackDev: {}
 }
 
 t.test('Multiple entries', t => {

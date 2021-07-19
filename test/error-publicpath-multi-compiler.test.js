@@ -13,17 +13,19 @@ const opts = {
       mode: 'development',
       entry: [WEBPACK_ENTRY, `${hotConfig}&name=mobile`],
       stats: false,
-      output: { filename: 'mobile.js', publicPath: '/assets' }
+      output: { filename: 'mobile.js', publicPath: '/assets' },
+      infrastructureLogging: { level: 'none' }
     },
     {
       name: 'desktop',
       mode: 'development',
       entry: [WEBPACK_ENTRY, `${hotConfig}&name=desktop`],
       stats: false,
-      output: { filename: 'desktop.js', publicPath: '/assets' }
+      output: { filename: 'desktop.js', publicPath: '/assets' },
+      infrastructureLogging: { level: 'none' }
     }
   ],
-  webpackDev: { logLevel: 'silent' }
+  webpackDev: {}
 }
 
 t.test('Throws if webpackDev.publicPath option not explicitly defined in multi compiler mode', t => {

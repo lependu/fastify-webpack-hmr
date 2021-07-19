@@ -8,7 +8,7 @@ const WEBPACK_CONFIG =
   join(__dirname, '..', 'example', 'webpack.config.js')
 const opts = {
   config: WEBPACK_CONFIG,
-  webpackDev: { logLevel: 'silent' }
+  webpackDev: {}
 }
 
 t.test('Works with config option | string', t => {

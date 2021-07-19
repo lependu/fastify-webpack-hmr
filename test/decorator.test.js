@@ -10,9 +10,10 @@ const opts = {
     mode: 'development',
     stats: false,
     entry: WEBPACK_ENTRY,
-    output: { publicPath: '/assets', filename: 'main.js' }
+    output: { publicPath: '/assets', filename: 'main.js' },
+    infrastructureLogging: { level: 'none' }
   },
-  webpackDev: { logLevel: 'silent' }
+  webpackDev: {}
 }
 
 t.test('Decorates instance', t => {

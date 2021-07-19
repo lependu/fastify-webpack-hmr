@@ -8,11 +8,12 @@ const WEBPACK_ENTRY = join(__dirname, '..', 'example', 'client.js')
 const opts = {
   config: {
     mode: 'development',
-    stats: false,
     entry: WEBPACK_ENTRY,
-    output: { publicPath: '/assets', filename: 'main.js' }
+    stats: false,
+    output: { publicPath: '/assets', filename: 'main.js' },
+    infrastructureLogging: { level: 'none' }
   },
-  webpackDev: { logLevel: 'silent' }
+  webpackDev: {}
 }
 
 t.test('Works with config option | string', t => {
