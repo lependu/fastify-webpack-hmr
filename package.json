@@ -35,7 +35,7 @@
   "dependencies": {
     "fastify-plugin": "^3.0.0",
     "middie": "^5.1.0",
-    "webpack": "^4.43.0",
+    "webpack": "^5.55.1",
     "webpack-dev-middleware": "^3.7.0",
     "webpack-hot-middleware": "^2.25.0"
   },
