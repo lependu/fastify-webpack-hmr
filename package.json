@@ -29,7 +29,7 @@
   "devDependencies": {
     "fastify": "^3.0.3",
     "simple-get": "^4.0.0",
-    "standard": "^16.0.0",
+    "standard": "^17.0.0",
     "tap": "^14.10.7"
   },
   "dependencies": {
